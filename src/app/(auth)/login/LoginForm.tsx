@@ -14,16 +14,32 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchemaType } from "@/lib/schemas/LoginSchema";
 import { LoginSchema } from "@/lib/schemas/LoginSchema";
+import { signInUser } from "@/app/actions/authActions";
+import { useRouter } from "next/navigation";
+
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function LoginForm() {
 
   const { register , handleSubmit, formState: {isValid, errors} } = useForm<LoginSchemaType>({
-    resolver: zodResolver(LoginSchema),
+    //resolver: zodResolver(LoginSchema),
     mode: "onTouched", 
   }); 
 
-  const onSubmit = (data: LoginSchemaType) => {
-    console.log(data);
+  const router = useRouter();
+
+  const onSubmit = async (data: LoginSchemaType) => {
+    console.log('FORMDATA',data);
+    const result = await signInUser(data);
+    console.log('RESULT',result);
+
+    if (result.status === "success") {
+      console.log("User logged in successfully");
+      router.push("/members");
+      router.refresh()
+    } else {
+      toast.error(result.error as string);
+    }
   };
 
   return (
