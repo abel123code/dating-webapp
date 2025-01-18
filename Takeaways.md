@@ -30,3 +30,15 @@ First download a typescript executor using npm i -D ts-node
 When you run npx prisma db seed, Prisma looks up your package.json to find the "prisma": { "seed": "..." } script.
 It executes that script, which in turn imports the Prisma Client and inserts your member data into the database.
 Without importing and instantiating the Prisma Client in your seed file, you’d have no way of persisting that data.
+
+Summary of Their Roles for the useForm react hook
+
+register Binds input fields to the form state.
+handleSubmit Handles form submission, runs validation, and calls your submission callback.
+reset Resets the form inputs to their initial or specified values.
+setError Manually sets validation errors for specific fields.
+errors Holds validation errors for each field.
+isSubmitting Indicates if the form is being submitted (useful for disabling UI).
+isDirty Indicates if any field has been modified.
+isValid Indicates if the form is valid (all fields pass validation).
+Let me know if you'd like additional examples or clarification!

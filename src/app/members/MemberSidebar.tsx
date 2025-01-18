@@ -16,22 +16,14 @@ import React from "react";
 
 type Props = {
   member: Member;
+  navLinks: { name: string; href: string }[];
 };
 
 export default function MemberSidebar({
-  member,
+  member, navLinks
 }: Props) {
   const pathname = usePathname();
-  const basePath = `/members/${member.userId}`;
-
-  const navLinks = [
-    { name: "Profile", href: `${basePath}` },
-    {
-      name: "Photos",
-      href: `${basePath}/photos`,
-    },
-    { name: "Chat", href: `${basePath}/chat` },
-  ];
+  
 
   return (
     <Card className="w-full mt-10 items-center h-[80vh]">
@@ -59,12 +51,12 @@ export default function MemberSidebar({
               href={link.href}
               key={link.name}
               className={`block rounded 
-                                ${
-                                  pathname ===
-                                  link.href
-                                    ? "text-default"
-                                    : "hover:text-default/50"
-                                }`}
+                ${
+                  pathname ===
+                  link.href
+                    ? "text-default"
+                    : "hover:text-default/50"
+                }`}
             >
               {link.name}
             </Link>
